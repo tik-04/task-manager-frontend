@@ -134,8 +134,7 @@ const Login = () => {
                   </a>
                 </div>
                 <button
-                  type="button"
-                  onClick={handleLogin}
+                  type="submit"
                   class="w-full text-white bg-[#2563eb] hover:bg-[#1d4ed8] focus:ring-4 focus:outline-none focus:ring-[#93c5fd] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   Sign in

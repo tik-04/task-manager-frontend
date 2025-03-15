@@ -11,7 +11,7 @@ const SignUp = () => {
   const [register,SetRegister] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3000/auth/register", {
@@ -20,11 +20,13 @@ const SignUp = () => {
         password,
       });
 
-      if(!response.success){
+      if(!response.data?.success){
         SetRegister(false)
       }
 
-      SetRegister(true)
+      if (response.status === 201) {
+        SetRegister(true);
+    }    
 
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
@@ -64,7 +66,7 @@ const SignUp = () => {
             <h2 className="text-lg font-bold text-green-600">Success</h2>
             <p className="text-gray-700">Register Success fully</p>
             <button
-              onClick={() => SetRegister("")}
+              onClick={() => SetRegister(false)}
               className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg"
             >
               Close
@@ -93,7 +95,7 @@ const SignUp = () => {
                 Sign Up
               </h1>
 
-              <form class="space-y-4 md:space-y-6" onSubmit={handleLogin}>
+              <form class="space-y-4 md:space-y-6" onSubmit={handleRegister}>
                 <div>
                   <label
                     for="username"
@@ -166,33 +168,8 @@ const SignUp = () => {
                     required=""
                   />
                 </div> */}
-                <div class="flex items-center justify-between">
-                  <div class="flex items-start">
-                    <div class="flex items-center h-5">
-                      <input
-                        id="remember"
-                        aria-describedby="remember"
-                        type="checkbox"
-                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-[#93c5fd] "
-                        required=""
-                      />
-                    </div>
-                    <div class="ml-3 text-sm">
-                      <label for="remember" class="text-gray-500">
-                        Remember me
-                      </label>
-                    </div>
-                  </div>
-                  <a
-                    href="#"
-                    class="text-sm font-medium text-[#2563eb] hover:underline"
-                  >
-                    Forgot password?
-                  </a>
-                </div>
                 <button
-                  type="button"
-                  onClick={handleLogin}
+                  type="submit"
                   class="w-full text-white bg-[#2563eb] hover:bg-[#1d4ed8] focus:ring-4 focus:outline-none focus:ring-[#93c5fd] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                 >
                   Sign up
