@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import list_check from "../assets/list_check.svg"
 
 const Login = () => {
   const [email, SetEmail] = useState("");
@@ -60,7 +61,7 @@ const Login = () => {
           >
             <img
               class="w-8 h-8 mr-2"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+              src={list_check}
               alt="logo"
             />
             TikTaskTow
