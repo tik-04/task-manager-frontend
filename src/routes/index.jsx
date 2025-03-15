@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Tasks from "../pages/Tasks";
 import ProtectedRoute from "../components/ProtectedRoute";
+import SignUp from "../pages/SignUp";
 
 
 
@@ -17,6 +18,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Navigate to={ROUTES.LOGIN} />} />
         
         <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path={ROUTES.SIGNUP} element={<SignUp />} />
         
         {/* หน้าที่ต้องล็อกอินถึงเข้าได้ */}
         <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
