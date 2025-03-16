@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import list_check from "../assets/list_check.svg"
+import axiosInstance from "../api/axiosInstance";
 
 const Login = () => {
   const [email, SetEmail] = useState("");
@@ -19,6 +20,8 @@ const Login = () => {
 
       const token = response.data.token;
       localStorage.setItem("token", token);
+
+      axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
 
       navigate("/dashboard");
     } catch (error) {
