@@ -6,16 +6,14 @@ import { faFolderOpen } from "@fortawesome/free-regular-svg-icons";
 import { faBarsProgress } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
-import axiosInstance from "../api/axiosInstance";
 
 export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axiosInstance.get("/user"); // ✅ ใช้ axiosInstance เพื่อแนบ Token
+        const response = await axios.get("http://localhost:3000/user",{ withCredentials: true}); // ✅ ใช้ axiosInstance เพื่อแนบ Token
         setUser(response.data.user); // ✅ เก็บข้อมูล User ลง state
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -80,14 +78,14 @@ export default function Sidebar() {
             <div className="flex flex-col items-center w-full mt-3 border-t border-gray-300">
               <Link
                 to={ROUTES.HOME}
-                className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+                className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 focus:bg-gray-300 focus:shadow-md"
               >
                 <FontAwesomeIcon icon={faFolderOpen} />
                 <span className="ml-2 text-sm font-medium">Dashboard</span>
               </Link>
               <Link
                 to={ROUTES.TASKS}
-                className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+                className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 focus:bg-gray-300 focus:shadow-md"
               >
                 <FontAwesomeIcon icon={faBarsProgress} />
                 <span className="ml-2 text-sm font-medium">Tasks</span>

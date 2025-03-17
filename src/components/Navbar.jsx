@@ -1,21 +1,28 @@
 import { useNavigate } from "react-router-dom";
-import axiosInstance from "../api/axiosInstance";
+import axios from "axios";
 
 export default function Navbar() {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleLogout = () => {
-      localStorage.removeItem("token"); // ✅ ลบ Token ออกจาก localStorage
-      delete axiosInstance.defaults.headers.common["Authorization"]; // ✅ เคลียร์ Header ไม่ให้แนบ Token ไปอีก
-    
-      navigate("/login"); // ✅ Redirect ไปหน้า Login
-    };
-  
-    return (
-      <nav className="bg-blue-500 p-4 text-white flex justify-between items-center">
-        <h1>My App</h1>
-        <button onClick={() => handleLogout()}>Log out</button>
-      </nav>
+  const handleLogout = async () => {
+    await axios.post(
+      "http://localhost:3000/auth/logout", // ✅ ให้ browser ส่ง Cookie ไปด้วย
+      {},
+      { withCredentials: true}
     );
-  }
-  
+
+    navigate("/login"); // ✅ Redirect ไปหน้า Login
+  };
+
+  return (
+    <nav className="bg-blue-500 p-4 text-white flex justify-between items-center">
+      <h1>My App</h1>
+      <button
+        onClick={() => handleLogout()}
+        className="bg-red-500 text-white px-4 py-2 rounded"
+      >
+        Log out
+      </button>
+    </nav>
+  );
+}

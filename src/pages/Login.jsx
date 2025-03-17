@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import list_check from "../assets/list_check.svg"
-import axiosInstance from "../api/axiosInstance";
+
 
 const Login = () => {
   const [email, SetEmail] = useState("");
@@ -13,20 +13,16 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
-        email,
-        password,
-      });
-
-      const token = response.data.token;
-      localStorage.setItem("token", token);
-
-      axiosInstance.defaults.headers.Authorization = `Bearer ${token}`;
-
+      await axios.post(
+        "http://localhost:3000/auth/login",
+        { email, password },
+        { withCredentials: true } // ✅ ให้ browser ส่ง Cookie ไปด้วย
+      );
+  
       navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-
+  
       if (error.response) {
         setError(error.response.data?.message || "Invalid email or password");
       } else if (error.request) {
@@ -36,6 +32,7 @@ const Login = () => {
       }
     }
   };
+  
 
   return (
     <div className="">
