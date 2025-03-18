@@ -14,9 +14,12 @@ export default function Navbar() {
     navigate("/login"); // ✅ Redirect ไปหน้า Login
   };
 
-  return (
+    const today = new Intl.DateTimeFormat("en-CA").format(new Date());
+
+    return (
     <nav className="bg-blue-500 p-4 text-white flex justify-between items-center">
       <h1>My App</h1>
+      <h1>Today: {today}</h1>
       <button
         onClick={() => handleLogout()}
         className="bg-red-500 text-white px-4 py-2 rounded"
