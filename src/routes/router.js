@@ -3,7 +3,8 @@ const ROUTES = {
     TASKS: "/tasks",
     LOGIN: "/login",
     NOT_FOUND: "*", // หน้าหลงทาง
-    SIGNUP: "/register"
+    SIGNUP: "/register",
+    SETTING: "/setting"
   };
   
   export default ROUTES;

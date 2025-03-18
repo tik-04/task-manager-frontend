@@ -9,6 +9,7 @@ import ProtectedRoute from "../components/ProtectedRoute";
 import SignUp from "../pages/SignUp";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Setting from "../pages/Setting";
 
 export default function AppRoutes() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
@@ -47,6 +48,7 @@ export default function AppRoutes() {
         <Route element={<ProtectedRoute><Layout /></ProtectedRoute>}>
           <Route path={ROUTES.HOME} element={<Dashboard />} />
           <Route path={ROUTES.TASKS} element={<Tasks />} />
+          <Route path={ROUTES.SETTING} element={<Setting />} />
         </Route>
 
         <Route path={ROUTES.NOT_FOUND} element={<NotFound />} />

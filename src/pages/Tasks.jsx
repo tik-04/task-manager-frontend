@@ -3,6 +3,10 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import ShinyText from '../../Reactbits/ShinyText/ShinyText'
+import SplashCursor from '../../Reacbits/SplashCursor/SplashCursor'
+
+
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -70,7 +74,10 @@ const Tasks = () => {
   };
 
   return (
+    
+    
     <div className="p-4 flex flex-col items-center justify-center">
+
       {error && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -96,7 +103,6 @@ const Tasks = () => {
             return (
               <ul className="border border-2-black p-4" key={task?.id ?? index}>
                 <li className="text-center mb-2 font-bold">{task.title}</li>
-                {/*// ✅ แสดง title ของ task */}
                 <li>{task.description}</li>
                 <li>status:{task.status}</li>
                 <li>finishDay:{formattedDate}</li>
@@ -125,6 +131,9 @@ const Tasks = () => {
       >
         +Task
       </button>
+
+      
+      
 
       {/* <!-- Main modal --> */}
       {addTask ? (

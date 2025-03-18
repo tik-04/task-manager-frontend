@@ -3,29 +3,18 @@ import { Link } from "react-router-dom";
 import ROUTES from "../routes/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-regular-svg-icons";
-import { faBarsProgress } from "@fortawesome/free-solid-svg-icons";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import axios from "axios";
+import { faBarsProgress, faGears } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
+
+
 
 export default function Sidebar() {
-  const [user, setUser] = useState(null);
+  const location = useLocation();
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get("http://localhost:3000/user",{ withCredentials: true}); // ✅ ใช้ axiosInstance เพื่อแนบ Token
-        setUser(response.data.user); // ✅ เก็บข้อมูล User ลง state
-      } catch (error) {
-        console.error("Error fetching user:", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
 
   return (
-    <div>
+    <div className="">
 
       {/* Sidebar เล็ก (Mobile) */}
       <div
@@ -78,14 +67,14 @@ export default function Sidebar() {
             <div className="flex flex-col items-center w-full mt-3 border-t border-gray-300">
               <Link
                 to={ROUTES.HOME}
-                className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 focus:bg-gray-300 focus:shadow-md"
+                className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${ location.pathname === ROUTES.HOME ? "bg-gray-300 shadow-md" : ""}`}
               >
                 <FontAwesomeIcon icon={faFolderOpen} />
                 <span className="ml-2 text-sm font-medium">Dashboard</span>
               </Link>
               <Link
                 to={ROUTES.TASKS}
-                className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 focus:bg-gray-300 focus:shadow-md`}
+                className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${ location.pathname === ROUTES.TASKS ? "bg-gray-300 shadow-md" : ""}`}
               >
                 <FontAwesomeIcon icon={faBarsProgress} />
                 <span className="ml-2 text-sm font-medium">Tasks</span>
@@ -93,15 +82,14 @@ export default function Sidebar() {
             </div>
           </div>
         </div>
-
         <footer className="">
-          {user ?  (
-            <div className="">
-              <FontAwesomeIcon icon={faUser} className="mr-2"/>
-              {user.username}
-            </div>
-            ) : "Loading..."}
-        </footer>
+            <Link 
+              to={ROUTES.SETTING}
+              className="text-lg hover:text-gray-500">
+              <FontAwesomeIcon icon={faGears} className="mr-2"/>
+              Setting
+            </Link>
+      </footer>
       </div>
       {/* End sidebarDesktop */}
 

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import list_check from "../assets/list_check.svg"
+import list_check from "../assets/list_check.svg";
+import Iridescence from '../../Reactbits/Iridescence/Iridescence'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faListCheck } from "@fortawesome/free-solid-svg-icons";
 
+
+console.log("Iridescence Component:", Iridescence);
 
 const Login = () => {
   const [email, SetEmail] = useState("");
@@ -18,11 +23,11 @@ const Login = () => {
         { email, password },
         { withCredentials: true } // ✅ ให้ browser ส่ง Cookie ไปด้วย
       );
-  
+
       navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
-  
+
       if (error.response) {
         setError(error.response.data?.message || "Invalid email or password");
       } else if (error.request) {
@@ -32,11 +37,13 @@ const Login = () => {
       }
     }
   };
-  
 
   return (
     <div className="">
-
+    <div className="fixed inset-0 w-full h-full -z-10">
+      <Iridescence color={[1, 1, 1]} mouseReact={false} amplitude={0.1} speed={1.0} />
+    </div>
+      
       {error && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -52,18 +59,12 @@ const Login = () => {
         </div>
       )}
 
-
-      <section class="bg-gray-100">
+      <section class="">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
-            class="flex items-center mb-6 text-2xl font-semibold text-gray-900 d"
+            class="flex items-center mb-6 text-3xl font-bold bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 bg-clip-text text-transparent"
           >
-            <img
-              class="w-8 h-8 mr-2"
-              src={list_check}
-              alt="logo"
-            />
             TikTaskTow
           </a>
           <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
