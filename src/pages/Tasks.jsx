@@ -54,6 +54,16 @@ const Tasks = () => {
     }
   }
 
+  const handleDeleteTask = async (taskId) => {
+    try{
+      await axios.delete(`http://localhost:3000/tasks/${taskId}`,{ withCredentials : true })
+      fetchTasks();
+    } catch(error) {
+      console.error("Error Delete Task:",error)
+      setError(error.response?.data?.message || "Failed to delete task");
+    }
+  }
+
 
 
   return (
@@ -87,8 +97,12 @@ const Tasks = () => {
                     <li>status:{task.status}</li>
                     <li>finishDay:{formattedDate}</li>
                     <div className="flex justify-center items-center mt-2 gap-4">
-                      <button className="border-[1px] border-red-400 text-red-600 hover:border-red-200 hover:text-red-400 p-1.5 rounded-md"><FontAwesomeIcon icon={faTrash}  className=""/></button>
-                      <button className="border-[1px] border-blue-400 text-blue-600 hover:border-blue-200 hover:text-blue-400 p-1.5 rounded-md"><FontAwesomeIcon icon={faPenToSquare} /></button>
+                      <button className="border-[1px] border-red-400 text-red-600 hover:border-red-200 hover:text-red-400 p-1.5 rounded-md">
+                        <FontAwesomeIcon icon={faTrash} onClick={() => handleDeleteTask(task.id)}/>
+                      </button>
+                      <button className="border-[1px] border-blue-400 text-blue-600 hover:border-blue-200 hover:text-blue-400 p-1.5 rounded-md">
+                        <FontAwesomeIcon icon={faPenToSquare} />
+                      </button>
                     </div>
                   </ul>
               )
