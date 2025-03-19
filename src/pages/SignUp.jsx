@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import list_check from "../assets/list_check.svg"
+import Iridescence from '../../Reactbits/Iridescence/Iridescence'
+import { useMemo } from "react";
 
 const SignUp = () => {
   const [username,SetUsername] = useState("")
@@ -41,11 +43,19 @@ const SignUp = () => {
     }
   };
 
+  const background = useMemo(() => (
+    <div className="fixed inset-0 w-full h-full -z-10">
+      <Iridescence color={[0, 1, 1]} mouseReact={false} amplitude={0.1} speed={1.0} />
+    </div>
+  ), []);
+
   return (
     <div className="">
 
+      {background}
+
       {error && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-lg font-bold text-red-600">Error</h2>
             <p className="text-gray-700">{error}</p>
@@ -61,7 +71,7 @@ const SignUp = () => {
 
 
     {register && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-lg font-bold text-green-600">Success</h2>
             <p className="text-gray-700">Register Success fully</p>
@@ -76,7 +86,7 @@ const SignUp = () => {
       )}
 
 
-      <section class="bg-gray-100">
+      <section class="">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
@@ -89,7 +99,7 @@ const SignUp = () => {
             />
             TikTaskTow
           </a>
-          <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+          <div class="w-full bg-white/30 backdrop-blur-xl rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Sign Up

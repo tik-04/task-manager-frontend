@@ -48,7 +48,7 @@ const Login = () => {
       
 
       {error && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-lg font-bold text-red-600">Error</h2>
             <p className="text-gray-700">{error}</p>

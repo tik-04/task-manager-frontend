@@ -3,6 +3,7 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
+import ASCIIText from "../../Reactbits/ASCIIText/ASCIIText"
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -43,7 +44,9 @@ export default function Navbar() {
             </div>
         ) : "Loading..."}
       </h1>
-      <h1>Today: {today}</h1>
+      <h1>
+        Today: {today}
+      </h1>
       <button
         onClick={() => handleLogout()}
         className="bg-red-500 text-white px-4 py-2 rounded"
