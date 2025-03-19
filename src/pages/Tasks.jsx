@@ -3,6 +3,7 @@ import axios from "axios";
 import ErrorTask from "../components/tasks/ErrorTask";
 import AllTasks from "../components/tasks/AllTasks";
 import AddTask from "../components/tasks/AddTask";
+import EditTask from "../components/tasks/EditTask";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -12,6 +13,9 @@ const Tasks = () => {
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("pending");
   const [error, setError] = useState(false);
+  const [edit, setEdit] = useState(false)
+  const [editId, setEditId] = useState(0)
+
 
   const fetchTasks = async () => {
     console.log("Fetching tasks...");
@@ -67,6 +71,27 @@ const Tasks = () => {
     }
   };
 
+  const handleEditTask = async (e,taskId) => {
+    e.preventDefault();
+    console.log(taskId)
+    try {
+      const editTask = { title, description: desc, due_date: date };
+      await axios.patch(`http://localhost:3000/tasks/${taskId}`,editTask,{ withCredentials:true })
+
+      fetchTasks();
+      setTitle("");
+      setDesc("");
+      setDate("");
+
+      setEditId(0);
+      setEdit(false);
+
+    } catch(error) {
+      console.error("Error Delete Task:", error);
+      setError(error.response?.data?.message || "Failed to delete task");
+    }
+  }
+
   return (
     
     
@@ -79,11 +104,19 @@ const Tasks = () => {
                        setStatus={setStatus} setAddTask={setAddTask} handleCreateTask={handleCreateTask} />
               ) : null}
 
+              {/* <!-- Edit Tasks modal --> */}
+              { edit ? (
+                <EditTask setEdit={setEdit} handleEditTask={handleEditTask}
+                title={title} setTitle={setTitle}
+                desc={desc} setDesc={setDesc}
+                date={date} setDate={setDate} editId={editId}/>
+              ) : null}
+
       {error && <ErrorTask error={error} setError={setError} />}
 
       <h1 className="text-center font-bold text-xl">Tasks</h1>
       {tasks.length > 0 ? (
-        <AllTasks tasks={tasks} handleDeleteTask={handleDeleteTask}/>
+        <AllTasks tasks={tasks} handleDeleteTask={handleDeleteTask} setEdit={setEdit} setEditId={setEditId}/>
       ) : (
         <h1 className="text-center p-10">You have no Task</h1>
       )}

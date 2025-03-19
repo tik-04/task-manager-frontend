@@ -3,7 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const AllTasks = ( { tasks, handleDeleteTask }) => {
+const AllTasks = ( { tasks,setEdit, setEditId, handleDeleteTask}) => {
+  
+  const handleEdit = (taskId) => {
+    setEdit(true);
+    setEditId(taskId); 
+  }
+
   return (
     <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-2 p-10 gap-4">
       {tasks.map((task, index) => {
@@ -23,7 +29,10 @@ const AllTasks = ( { tasks, handleDeleteTask }) => {
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>
-              <button className="border-[1px] border-blue-400 text-blue-600 hover:border-blue-200 hover:text-blue-400 p-1.5 rounded-md">
+              <button 
+                className="border-[1px] border-blue-400 text-blue-600 hover:border-blue-200 hover:text-blue-400 p-1.5 rounded-md"
+                onClick={() => handleEdit(task.id)}
+              >
                 <FontAwesomeIcon icon={faPenToSquare} />
               </button>
             </div>
