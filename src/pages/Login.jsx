@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import list_check from "../assets/list_check.svg";
 import Iridescence from '../../Reactbits/Iridescence/Iridescence'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faListCheck } from "@fortawesome/free-solid-svg-icons";
+import { useMemo } from "react";
 
 
 console.log("Iridescence Component:", Iridescence);
@@ -38,12 +36,17 @@ const Login = () => {
     }
   };
 
+  const background = useMemo(() => (
+    <div className="fixed inset-0 w-full h-full -z-10">
+      <Iridescence color={[0, 1, 1]} mouseReact={false} amplitude={0.1} speed={1.0} />
+    </div>
+  ), []);
+
   return (
     <div className="">
-    <div className="fixed inset-0 w-full h-full -z-10">
-      <Iridescence color={[1, 1, 1]} mouseReact={false} amplitude={0.1} speed={1.0} />
-    </div>
+      {background}
       
+
       {error && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
@@ -63,11 +66,11 @@ const Login = () => {
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <a
             href="#"
-            class="flex items-center mb-6 text-3xl font-bold bg-gradient-to-r from-purple-500 via-pink-400 to-blue-400 bg-clip-text text-transparent"
+            class="flex items-center mb-6 text-3xl font-bold bg-gradient-to-r from-white via-white to-blue-400 bg-clip-text text-transparent"
           >
             TikTaskTow
           </a>
-          <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+          <div class="w-full bg-white/30 backdrop-blur-xl rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
             <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                 Sign in to your account
