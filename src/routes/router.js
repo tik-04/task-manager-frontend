@@ -4,7 +4,8 @@ const ROUTES = {
     LOGIN: "/login",
     NOT_FOUND: "*", // หน้าหลงทาง
     SIGNUP: "/register",
-    SETTING: "/setting"
+    SETTING: "/setting",
+    HISTORY: "/history"
   };
   
   export default ROUTES;

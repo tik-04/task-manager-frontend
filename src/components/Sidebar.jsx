@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ROUTES from "../routes/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderOpen } from "@fortawesome/free-regular-svg-icons";
-import { faBarsProgress, faFolder, faGears } from "@fortawesome/free-solid-svg-icons";
+import { faBarsProgress, faClockRotateLeft, faFolder, faGears } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
 import RotatingText from "../../Reactbits/RotatingText/RotatingText"
 
@@ -32,15 +32,21 @@ export default function Sidebar() {
         <div className="flex flex-col items-center mt-3 border-t border-gray-300">
           <Link
               to={ROUTES.HOME}
-              className="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+              className={`flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${ location.pathname === ROUTES.HOME ? "bg-gray-300" : ""}`}
             >
               <FontAwesomeIcon icon={faFolderOpen} />
           </Link>
           <Link
               to={ROUTES.TASKS}
-              className="flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300"
+              className={`flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${ location.pathname === ROUTES.TASKS ? "bg-gray-300" : ""}`}
             >
               <FontAwesomeIcon icon={faBarsProgress} />
+          </Link>
+          <Link
+              to={ROUTES.HISTORY}
+              className={`flex items-center justify-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300 ${ location.pathname === ROUTES.HISTORY ? "bg-gray-300" : ""}`}
+            >
+              <FontAwesomeIcon icon={faClockRotateLeft} />
           </Link>
 
         </div>
@@ -79,17 +85,24 @@ export default function Sidebar() {
             <div className="flex flex-col items-center w-full mt-4 border-t border-gray-300">
               <Link
                 to={ROUTES.HOME}
-                className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100   ${ location.pathname === ROUTES.HOME ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
+                className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100   ${ location.pathname === ROUTES.HOME ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
               >
                 {location.pathname === ROUTES.HOME ? <FontAwesomeIcon icon={faFolderOpen} /> : <FontAwesomeIcon icon={faFolder} />}
                 <span className="ml-2 text-sm font-medium">Dashboard</span>
               </Link>
               <Link
                 to={ROUTES.TASKS}
-                className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 ${ location.pathname === ROUTES.TASKS ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
+                className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 ${ location.pathname === ROUTES.TASKS ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
               >
                 <FontAwesomeIcon icon={faBarsProgress} />
                 <span className="ml-2 text-sm font-medium">Tasks</span>
+              </Link>
+              <Link
+                to={ROUTES.HISTORY}
+                className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 ${ location.pathname === ROUTES.HISTORY ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
+              >
+                <FontAwesomeIcon icon={faClockRotateLeft} />
+                <span className="ml-2 text-sm font-medium">HISTORY</span>
               </Link>
             </div>
           </div>
