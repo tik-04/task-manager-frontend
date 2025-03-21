@@ -4,7 +4,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faSquareCheck } from "@fortawesome/free-regular-svg-icons";
 
-const AllTasks = ( { tasks,setEdit, setEditId, handleDeleteTask}) => {
+const AllTasks = ( { tasks,setEdit, setEditId, handleDeleteTask ,handleFinishTask} ) => {
   
   const handleEdit = (taskId) => {
     setEdit(true);
@@ -38,7 +38,7 @@ const AllTasks = ( { tasks,setEdit, setEditId, handleDeleteTask}) => {
               </button>
               <button 
                 className="border-[1px] border-green-400 text-green-600 hover:border-green-200 hover:text-green-400 p-1.5 rounded-md"
-                onClick={() => handleFinish(task.id)}
+                onClick={() => handleFinishTask(task.id,task.status)}
               >
                 <FontAwesomeIcon icon={faSquareCheck} />
               </button>

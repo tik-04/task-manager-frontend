@@ -93,9 +93,10 @@ const Tasks = () => {
     }
   };
 
-  const handleFinishTask = async (taskId) => {
+  const handleFinishTask = async (taskId,task_status) => {
     try {
-      await axios.delete(`http://localhost:3000/tasks/${taskId}`, {
+      const taskStatus = { status:task_status };
+      await axios.patch(`http://localhost:3000/tasks/${taskId}/finish`, taskStatus , {
         withCredentials: true,
       });
       fetchTasks();
@@ -145,12 +146,14 @@ const Tasks = () => {
         {error && <ErrorTask error={error} setError={setError} />}
 
         <h1 className="text-center font-bold text-xl">Tasks</h1>
+        <h1 className="text-center text-xl text-red-600 mt-5">You can't finish the task if the status is pending</h1>
         {tasks.length > 0 ? (
           <AllTasks
             tasks={tasks}
             handleDeleteTask={handleDeleteTask}
             setEdit={setEdit}
             setEditId={setEditId}
+            handleFinishTask={handleFinishTask}
           />
         ) : (
           <h1 className="text-center p-10">You have no Task</h1>

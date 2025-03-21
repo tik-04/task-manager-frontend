@@ -87,21 +87,21 @@ export default function Sidebar() {
                 to={ROUTES.HOME}
                 className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100   ${ location.pathname === ROUTES.HOME ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
               >
-                {location.pathname === ROUTES.HOME ? <FontAwesomeIcon icon={faFolderOpen} /> : <FontAwesomeIcon icon={faFolder} />}
+                {location.pathname === ROUTES.HOME ? <FontAwesomeIcon icon={faFolderOpen} className=" animate-bounce"/> : <FontAwesomeIcon icon={faFolder} />}
                 <span className="ml-2 text-sm font-medium">Dashboard</span>
               </Link>
               <Link
                 to={ROUTES.TASKS}
                 className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 ${ location.pathname === ROUTES.TASKS ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
               >
-                <FontAwesomeIcon icon={faBarsProgress} />
+                <FontAwesomeIcon icon={faBarsProgress} className={`${ location.pathname === ROUTES.TASKS ? "animate-bounce" : ""}`}/>
                 <span className="ml-2 text-sm font-medium">Tasks</span>
               </Link>
               <Link
                 to={ROUTES.HISTORY}
                 className={`flex items-center w-full h-12 px-3 mt-3 rounded hover:bg-gray-300 transition delay-50 duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 ${ location.pathname === ROUTES.HISTORY ? "bg-gray-300 shadow-md translate-x-2" : ""}`}
               >
-                <FontAwesomeIcon icon={faClockRotateLeft} />
+                <FontAwesomeIcon icon={faClockRotateLeft} className={`${ location.pathname === ROUTES.HISTORY ? "animate-spin" : ""}`} />
                 <span className="ml-2 text-sm font-medium">HISTORY</span>
               </Link>
             </div>
@@ -110,7 +110,7 @@ export default function Sidebar() {
         <footer className="">
             <Link 
               to={ROUTES.SETTING}
-              className={`text-lg hover:text-gray-300 `}>
+              className={`text-lg hover:text-gray-300 ${ location.pathname === ROUTES.SETTING ? "animate-pulse" : ""}`}>
               <FontAwesomeIcon icon={faGears} className="mr-2"/>
               Setting
             </Link>
