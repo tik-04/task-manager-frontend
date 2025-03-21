@@ -1,44 +1,12 @@
 import React from "react";
 import { Card, Typography } from "@material-tailwind/react";
 
-const TABLE_HEAD = ["TaskName","Description", "Status", "Due date", "submitDate",];
-
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Managerlawndiawhfpoajwdfpoawjfpoawjfwaoiidawf",
-    status:"compledt",
-    date: "23/04/18",
-    submitDate: "23/4/25"
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    status:"compledt",
-    date: "23/04/18",
-    submitDate: "23/4/25"
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    status:"compledt",
-    date: "23/04/18",
-    submitDate: "23/4/25"
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    status:"compledt",
-    date: "23/04/18",
-    submitDate: "23/4/25"
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    status:"compledt",
-    date: "23/04/18",
-    submitDate: "23/4/25"
-  },
+const TABLE_HEAD = [
+  "TaskName",
+  "Description",
+  "Status",
+  "Due date",
+  "submitStatus",
 ];
 
 const Table = ({ historyTask }) => {
@@ -64,19 +32,22 @@ const Table = ({ historyTask }) => {
           </tr>
         </thead>
         <tbody>
-          {TABLE_ROWS.map((e, index) => {
-            const isLast = index === TABLE_ROWS.length - 1;
+          {historyTask.map((e, index) => {
+            const formattedDate = new Intl.DateTimeFormat("en-CA").format(
+              new Date(e.due_date)
+            );
+            const isLast = index === historyTask.length - 1;
             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
- 
+
             return (
-              <tr key={e.name}>
+              <tr key={e.id}>
                 <td className={classes}>
                   <Typography
                     variant="small"
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {e.name}
+                    {e.title}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -85,7 +56,7 @@ const Table = ({ historyTask }) => {
                     color="blue-gray"
                     className="font-normal w-24 overflow-scroll"
                   >
-                    {e.job}
+                    {e.description}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -103,7 +74,7 @@ const Table = ({ historyTask }) => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {e.date}
+                    {formattedDate}
                   </Typography>
                 </td>
                 <td className={classes}>
@@ -112,7 +83,7 @@ const Table = ({ historyTask }) => {
                     color="blue-gray"
                     className="font-normal"
                   >
-                    {e.submitDate}
+                    In Time (mockdata)
                   </Typography>
                 </td>
               </tr>
