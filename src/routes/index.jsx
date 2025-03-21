@@ -12,6 +12,7 @@ import axios from "axios";
 import Setting from "../pages/Setting";
 import History from "../pages/History";
 
+
 export default function AppRoutes() {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
