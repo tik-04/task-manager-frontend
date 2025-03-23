@@ -1,8 +1,9 @@
 import React from 'react'
+import TaskSummary from './TaskSummary'
 
 const MainDashboard = () => {
   return (
-    <div className='shadow-md p-4 h-[65%] mt-4 rounded-lg overflow-scroll bg-slate-400'>
+    <div className='shadow-md h-[65%] mt-4 rounded-lg p-4 bg-slate-300 w-full'>
 
 
       <div className='h-full flex flex-col justify-center items-center p-4'>
@@ -15,9 +16,7 @@ const MainDashboard = () => {
               <h1 className=''>Footer</h1>
             </div>
           </div>
-          <div className='w-[35%] text-center shadow-2xl  bg-white h-[90%] rounded-2xl'>
-            <h1>Block 2 at row 1</h1>
-          </div>
+          <TaskSummary />
         </div>
         <div className='flex justify-between items-center h-[50%] w-[80%]'>
           <div className='w-[62%] flex justify-between text-center  h-[90%] '>

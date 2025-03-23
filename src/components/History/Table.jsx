@@ -3,7 +3,6 @@ import { Card, Typography } from "@material-tailwind/react";
 
 const TABLE_HEAD = [
   "TaskName",
-  "Description",
   "Status",
   "Due date",
   "submitStatus",
@@ -48,15 +47,6 @@ const Table = ({ historyTask }) => {
                     className="font-normal"
                   >
                     {e.title}
-                  </Typography>
-                </td>
-                <td className={classes}>
-                  <Typography
-                    variant="small"
-                    color="blue-gray"
-                    className="font-normal w-24 overflow-scroll"
-                  >
-                    {e.description}
                   </Typography>
                 </td>
                 <td className={classes}>

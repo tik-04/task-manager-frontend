@@ -1,17 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-
-const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-]
+import ROUTES from "../routes/router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -87,7 +81,7 @@ export default function Navbar() {
     //   </div>
     // </nav>
     <Disclosure as="nav" className="bg-gray-800">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+      <div className="  px-2 sm:px-6 ">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden text-white">
             {/* Mobile menu button*/}
@@ -96,7 +90,7 @@ export default function Navbar() {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4 text-white">
-                  Test
+                  <h1>Today : {today}</h1>
               </div>
             </div>
           </div>
@@ -136,12 +130,13 @@ export default function Navbar() {
                   </a>
                 </MenuItem>
                 <MenuItem>
-                  <a
+                  <Link
+                    to={ROUTES.SETTING}
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                   >
                     Settings
-                  </a>
+                  </Link>
                 </MenuItem>
                 <MenuItem>
                   <a

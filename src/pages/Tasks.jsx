@@ -5,6 +5,7 @@ import AllTasks from "../components/tasks/AllTasks";
 import AddTask from "../components/tasks/AddTask";
 import EditTask from "../components/tasks/EditTask";
 import { motion } from "framer-motion";
+import { FcAddDatabase } from "react-icons/fc";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -160,10 +161,10 @@ const Tasks = () => {
         )}
 
         <button
-          className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded animate-bounce focus:animate-none hover:animate-none inline-flex text-md  mt-3 tracking-wide "
+          className=" flex justify-between items-center bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded animate-bounce focus:animate-none hover:animate-none text-md  mt-3 tracking-wide "
           onClick={() => setAddTask(true)}
         >
-          +Task
+          <FcAddDatabase /><div className="font-bold">Task</div>
         </button>
       </div>
     </motion.div>
