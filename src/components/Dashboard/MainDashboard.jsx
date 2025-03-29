@@ -1,21 +1,14 @@
 import React from 'react'
 import TaskSummary from './TaskSummary'
+import Userinfo from './Userinfo'
 
 const MainDashboard = () => {
   return (
     <div className='shadow-md h-[65%] mt-4 rounded-lg p-4 bg-slate-300 w-full'>
 
-
       <div className='h-full flex flex-col justify-center items-center p-4'>
         <div className='flex justify-between items-center h-[50%] w-[80%]'>
-          <div className='p-4 w-[62%] text-center bg-white h-[90%] rounded-2xl shadow-2xl flex flex-col justify-between items-start'>
-            <div>
-              <h1 className=''> some icon Block 1 at row 1</h1>
-            </div>
-            <div>
-              <h1 className=''>Footer</h1>
-            </div>
-          </div>
+          <Userinfo />
           <TaskSummary />
         </div>
         <div className='flex justify-between items-center h-[50%] w-[80%]'>
