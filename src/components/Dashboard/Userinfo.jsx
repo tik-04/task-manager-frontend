@@ -23,7 +23,7 @@ const Userinfo = () => {
   ];
 
   return (
-    <div className="p-4 w-[62%] text-center bg-white h-[90%] rounded-2xl shadow-2xl flex flex-col justify-between items-start">
+    <article className="p-4 w-[62%] text-center bg-white h-[90%] rounded-2xl shadow-2xl flex flex-col justify-between items-start">
       <div className="w-full">
         <div className="w-full flex justify-between items-center">
           <div className="flex justify-center items-center gap-2 text-2xl">
@@ -74,7 +74,7 @@ const Userinfo = () => {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

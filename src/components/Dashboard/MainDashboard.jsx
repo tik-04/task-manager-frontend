@@ -1,34 +1,32 @@
 import React from 'react'
 import TaskSummary from './TaskSummary'
 import Userinfo from './Userinfo'
+import UpcomingTask from './UpcomingTask'
+import ProgressChart from './ProgressChart'
 
 const MainDashboard = () => {
   return (
-    <div className='shadow-md h-[65%] mt-4 rounded-lg p-4 bg-slate-300 w-full'>
+    <main className='shadow-md h-[65%] mt-4 rounded-lg p-4 bg-slate-300 w-full'>
 
-      <div className='h-full flex flex-col justify-center items-center p-4'>
-        <div className='flex justify-between items-center h-[50%] w-[80%]'>
+      <main className='h-full flex flex-col justify-center items-center p-4'>
+        <section className='flex justify-between items-center h-[50%] w-[80%]'>
           <Userinfo />
           <TaskSummary />
-        </div>
-        <div className='flex justify-between items-center h-[50%] w-[80%]'>
-          <div className='w-[62%] flex justify-between text-center  h-[90%] '>
-            <div className='rounded-2xl bg-white w-[48%] shadow-lg '>
-              <h1>Block 1 at row 2</h1>
-            </div>
-            <div className='rounded-2xl bg-white w-[48%] shadow-2xl '>
-              <h1>Block 2 at row 2</h1>
-            </div>
-          </div>
-          <div className='w-[35%] text-center bg-white h-[90%] rounded-2xl shadow-2xl '>
-            <h1>Block 3 at row 2</h1>
-          </div>
-        </div>
-      </div>
+        </section>
+        <section className='flex justify-between items-center h-[50%] w-[80%]'>
+          <section className='w-[62%] flex justify-between text-center  h-[90%] '>
+            <UpcomingTask />
+            <ProgressChart />
+          </section>
+          <article className='w-[35%] text-center flex justify-center items-center bg-white h-[90%] rounded-2xl shadow-2xl '>
+            <h1>Coming Soon...</h1>
+          </article>
+        </section>
+      </main>
 
 
 
-    </div>
+    </main>
   )
 }
 

@@ -8,7 +8,7 @@ const TaskSummary = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-[35%] text-center shadow-2xl  bg-white h-[90%] rounded-2xl flex flex-col items-start p-3">
+    <article className="w-[35%] text-center shadow-2xl  bg-white h-[90%] rounded-2xl flex flex-col items-start p-3">
       <div className="flex justify-between w-full items-center">
         <h1>Task Summary</h1>
         <Link
@@ -55,7 +55,7 @@ const TaskSummary = () => {
       ) : (
         ""
       )}
-    </div>
+    </article>
   );
 };
 
