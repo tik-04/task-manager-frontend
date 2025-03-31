@@ -21,7 +21,7 @@ const Tasks = () => {
   const fetchTasks = async () => {
     console.log("Fetching tasks...");
     try {
-      const response = await axios.get("http://localhost:3000/tasks", {
+      const response = await axios.get("/tasks", {
         withCredentials: true,
       });
       console.log("Tasks:", response.data.data);
@@ -42,7 +42,7 @@ const Tasks = () => {
       const newTask = { title, description: desc, status, due_date: date };
       console.log(newTask);
       await axios.post(
-        "http://localhost:3000/tasks",
+        "/tasks",
         newTask,
         { withCredentials: true } // ✅ ให้ browser ส่ง Cookie ไปด้วย
       );
@@ -62,7 +62,7 @@ const Tasks = () => {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:3000/tasks/${taskId}`, {
+      await axios.delete(`/tasks/${taskId}`, {
         withCredentials: true,
       });
       fetchTasks();
@@ -77,7 +77,7 @@ const Tasks = () => {
     console.log(taskId);
     try {
       const editTask = { title, description: desc, due_date: date };
-      await axios.patch(`http://localhost:3000/tasks/${taskId}`, editTask, {
+      await axios.patch(`/tasks/${taskId}`, editTask, {
         withCredentials: true,
       });
 
@@ -97,7 +97,7 @@ const Tasks = () => {
   const handleFinishTask = async (taskId,task_status) => {
     try {
       const taskStatus = { status:task_status };
-      await axios.patch(`http://localhost:3000/tasks/${taskId}/finish`, taskStatus , {
+      await axios.patch(`/tasks/${taskId}/finish`, taskStatus , {
         withCredentials: true,
       });
       fetchTasks();

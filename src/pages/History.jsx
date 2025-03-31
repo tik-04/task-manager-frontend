@@ -10,7 +10,7 @@ const History = () => {
   const fetchHistory = async () => {
     console.log("Fetching tasks...");
     try {
-      const response = await axios.get("http://localhost:3000/tasks" , { withCredentials:true})
+      const response = await axios.get("/tasks" , { withCredentials:true})
       console.log(response.data.data)
       setHistoryTask(response.data.data)
     } catch (error) {

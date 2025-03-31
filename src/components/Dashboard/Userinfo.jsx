@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { FcBusinessman } from "react-icons/fc";
 import { CiCircleChevDown } from "react-icons/ci";
 import {
@@ -10,16 +10,77 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import { startOfWeek, endOfWeek, format,parseISO } from 'date-fns';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 const Userinfo = () => {
-  const mockData = [
-    { name: "Mon", percent: 40 },
-    { name: "Tue", percent: 55 },
-    { name: "Wed", percent: 60 },
-    { name: "Thu", percent: 30 },
-    { name: "Fri", percent: 80 },
-    { name: "Sat", percent: 90 },
-    { name: "Sun", percent: 70 },
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const weekOption = ['Week 1','Week 2', 'Week 3']
+  const [historyTask, setHistoryTask] = useState([])
+
+
+  const getDayName = (dateStr) => {
+    try {
+      const date = parseISO(dateStr);
+      return format(date, 'EEE');
+    } catch (err) {
+      console.error("❌ Invalid dateStr in getDayName:", dateStr);
+      return null;
+    }
+  };
+  
+
+  const calcPercentFor = (dayName) => {
+    const match = historyTask.find(item => {
+      return getDayName(item.day) === dayName;
+    });
+  
+    return match ? match.percent : 0;
+  };
+
+  // หยุดที่ frontend 2 ใน chatgpt
+  const getWeekRange = (date) => {
+    const start = startOfWeek(date, { weekStartsOn: 1 });
+    const end = endOfWeek(date, { weekStartsOn: 1 });
+    return {
+      start: format(start, 'yyyy-MM-dd'),
+      end: format(end, 'yyyy-MM-dd'),
+    };
+  };
+
+  const getWeekData = async () => {
+    const { start, end } = getWeekRange(selectedDate);
+    try {
+      const response = await axios.get(`/tasks/week?start=${start}&end=${end}` , { withCredentials:true})
+      console.log(response.data.data)
+      setHistoryTask(response.data.data)
+      console.log("🌐 Full response:", response);
+      console.log("✅ response.data:", response.data);
+      console.log("📊 response.data.data:", response.data.data);
+
+
+    } catch (error) {
+      console.error("Fetching History Taks Error:",error)
+      setHistoryTask([])
+    }
+  }
+
+  useEffect(() => {
+    getWeekData()
+  }, [selectedDate]);
+  
+
+  const chartData = [
+    { name: "Mon", percent: calcPercentFor('Mon') },
+    { name: "Tue", percent: calcPercentFor('Tue') },
+    { name: "Wed", percent: calcPercentFor('Wed') },
+    { name: "Thu", percent: calcPercentFor('Thu') },
+    { name: "Fri", percent: calcPercentFor('Fri') },
+    { name: "Sat", percent: calcPercentFor('Sat') },
+    { name: "Sun", percent: calcPercentFor('Sun') },
   ];
 
   return (
@@ -30,9 +91,11 @@ const Userinfo = () => {
             <FcBusinessman className="bg-slate-200 rounded-lg p-1" />
             <h1 className="">User Info "NpTik"</h1>
           </div>
-          <button className="text-sm flex justify-center items-center gap-2 p-[6px] border-solid border-[1px] rounded-2xl  border-slate-300">
-            Week <CiCircleChevDown />
-          </button>
+          <DatePicker
+            selected={selectedDate}
+            onChange={(date) => setSelectedDate(date)}
+            className="border px-2 py-1 rounded-md"
+          />
         </div>
         <div className="text-start">
           <span className="text-xs text-slate-400">
@@ -53,10 +116,10 @@ const Userinfo = () => {
               Weekly Task Completion
             </h2>
             <ResponsiveContainer width="100%" height="100%">
-              {mockData.length === 0 ? (
+              {chartData.length === 0 ? (
                 <p className="text-sm text-red-400">No data this week</p>
               ) : (
-                <BarChart data={mockData}>
+                <BarChart data={chartData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="name" />
                   <YAxis hide />
